@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_catalog/core/store.dart';
+import 'package:flutter_catalog/models/cart.dart';
+import 'package:flutter_catalog/models/catalog.dart';
 import 'package:flutter_catalog/pages/cart_page.dart';
 import 'package:flutter_catalog/utils/routes.dart';
 import 'package:flutter_catalog/widgets/themes.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'pages/login_page.dart';
 import 'pages/home_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(VxState(
+    store: MyStore(),
+    child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -17,9 +23,9 @@ class MyApp extends StatelessWidget {
       theme: MyTheme.lightTheme(context),
       darkTheme: MyTheme.darkTheme(context),
       debugShowCheckedModeBanner: false,
-      initialRoute: MyRoutes.loginRoute,
+      initialRoute: MyRoutes.homeRoute,
       routes: {
-        "/": (context) => LoginPage(),
+        "/": (context) => HomePage(),
         MyRoutes.homeRoute: (context) => HomePage(),
         MyRoutes.loginRoute: (context) => LoginPage(),
         MyRoutes.cartRoute: (context) => CartPage()
