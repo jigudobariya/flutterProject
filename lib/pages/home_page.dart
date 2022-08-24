@@ -12,7 +12,7 @@ import 'package:flutter_catalog/models/catalog.dart';
 
 import '../widgets/home_widgets/Catalog_header.dart';
 import '../widgets/home_widgets/catalog_list.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   final int days = 30;
 
   final String name = "Coding";
-  final url = "https://api.jsonbin.io";
+  final url = "https://api.jsonbin.io/b/604dbddb683e7e079c4eefd3";
 
   @override
   void initState() {
@@ -34,11 +34,10 @@ class _HomePageState extends State<HomePage> {
 
   loadData() async {
     await Future.delayed(Duration(seconds: 2));
-    // final catalogJson =
-    //     await rootBundle.loadString("assets/files/catalog.json");
-    final response =
-        await http.get(Uri(host: url, path: "/b/604dbddb683e7e079c4eefd3"));
-    final catalogJson = response.body;
+    final catalogJson =
+        await rootBundle.loadString("assets/files/catalog.json");
+    // final response = await http.get(Uri.parse(url));
+    // final catalogJson = response.body;
 
     final decodeData = jsonDecode(catalogJson);
     var productsData = decodeData["products"];
@@ -60,7 +59,7 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: context.theme.buttonColor,
             child: Icon(CupertinoIcons.cart, color: Colors.white),
           ).badge(
-              color: Vx.red500,
+              color: Vx.gray300,
               size: 22,
               count: _cart.items.length,
               textStyle:
